@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #000;
+            color: #fff;
+        }
+        .overlay {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            max-width: 500px;
+            width: 90%;
+            margin: auto;
+            margin-top: 10vh;
+        }
+        @media (max-width: 640px) {
+            .overlay {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay p-8 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-200">BLUE DEMON</h2>
+            <button class="text-gray-300 hover:text-gray-500" onclick="closeForm()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <p class="text-gray-400 mb-6">Complete the form for the giveaway.</p>
+        <form id="signupForm">
+            <div class="mb-6">
+                <input id="name" type="text" placeholder="Name" class="w-full px-4 py-3 border border-gray-500 bg-black text-white rounded-lg focus:outline-none focus:border-white" required>
+            </div>
+            <div class="mb-6">
+                <input id="phone" type="tel" placeholder="Phone number" class="w-full px-4 py-3 border border-gray-500 bg-black text-white rounded-lg focus:outline-none focus:border-white" required>
+            </div>
+            <button type="submit" class="w-full bg-white text-black py-3 rounded-lg hover:bg-gray-200 transition duration-300">Submit</button>
+        </form>
+        <div id="successMessage" class="hidden bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 rounded-lg mt-6">
+            Form submitted successfully!
+        </div>
+        <p id="errorMessage" class="text-red-500 text-sm hidden mt-6"></p>
+
+        <!-- Channel Button -->
+        <div class="mt-6">
+            <a href="https://whatsapp.com/channel/0029Vah3fKtCnA7oMPTPJm1h" target="_blank">
+                <button class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition duration-300">CHANNEL</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Fetch the user's IP address
+        async function getIP() {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        }
+
+        // Form submission logic
+        async function submitForm(event) {
+            event.preventDefault();
+
+            // Get form data
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const ip = await getIP(); // Get the user's IP address
+
+            const formData = { name, phone, ip };
+
+            try {
+                // Send the form data to the server
+                const response = await fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+
+                // Handle response from the server
+                if (result.success) {
+                    document.getElementById('signupForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.remove('hidden');
+                } else if (result.error) {
+                    document.getElementById('errorMessage').textContent = result.error;
+                    document.getElementById('errorMessage').classList.remove('hidden');
+                }
+            } catch (error) {
+                document.getElementById('errorMessage').textContent = 'An error occurred. Please try again later.';
+                document.getElementById('errorMessage').classList.remove('hidden');
+            }
+        }
+
+        // Event listener for form submission
+        document.getElementById('signupForm').addEventListener('submit', submitForm);
+
+        // Function to close the form
+        function closeForm() {
+            document.querySelector('.overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
