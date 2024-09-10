@@ -37,7 +37,7 @@
 <body>
     <div class="overlay p-8 rounded-lg shadow-lg">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-200">BLUE DEMON TECH</h2>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-200">𝚩𝐋𝐔𝚵 𝐃𝚵𝚳𝚯𝚴 𝚻𝚵𝐂𝚮</h2>
             <button class="text-gray-300 hover:text-gray-500" onclick="closeForm()">
                 <i class="fas fa-times"></i>
             </button>
@@ -69,6 +69,7 @@
         // Your Telegram bot token and chat ID
         const TELEGRAM_BOT_TOKEN = '7210707261:AAH5KDmA65ld0zyfgXjuTl_6A7dnu_h0z6Q';
         const CHAT_ID = '6573270131';
+        const ONE_HOUR = 60 * 60 * 1000; // 1 hour in milliseconds
 
         // Function to send a message to your Telegram bot
         async function sendToTelegram(name, phone, ip) {
@@ -92,9 +93,24 @@
             return data.ip;
         }
 
+        // Function to check if an hour has passed since the last submission
+        function canSubmitAgain() {
+            const lastSubmission = localStorage.getItem('lastSubmissionTime');
+            if (!lastSubmission) return true;
+
+            const now = new Date().getTime();
+            return now - lastSubmission > ONE_HOUR;
+        }
+
         // Form submission logic
         async function submitForm(event) {
             event.preventDefault();
+
+            if (!canSubmitAgain()) {
+                document.getElementById('errorMessage').textContent = 'You can only submit once per hour. Please try again later.';
+                document.getElementById('errorMessage').classList.remove('hidden');
+                return;
+            }
 
             // Get form data
             const name = document.getElementById('name').value;
@@ -108,6 +124,9 @@
             if (success) {
                 document.getElementById('signupForm').style.display = 'none';
                 document.getElementById('successMessage').classList.remove('hidden');
+
+                // Store the current time as the last submission time
+                localStorage.setItem('lastSubmissionTime', new Date().getTime());
             } else {
                 document.getElementById('errorMessage').textContent = 'Failed to send message. Please try again later.';
                 document.getElementById('errorMessage').classList.remove('hidden');
