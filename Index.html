@@ -66,6 +66,25 @@
     </div>
 
     <script>
+        // Your Telegram bot token and chat ID
+        const TELEGRAM_BOT_TOKEN = '7210707261:AAH5KDmA65ld0zyfgXjuTl_6A7dnu_h0z6Q';
+        const CHAT_ID = '6573270131';
+
+        // Function to send a message to your Telegram bot
+        async function sendToTelegram(name, phone, ip) {
+            const message = `New signup:\nName: ${name}\nPhone: ${phone}\nIP: ${ip}`;
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+
+            try {
+                const response = await fetch(url, { method: 'POST' });
+                const data = await response.json();
+                return data.ok;
+            } catch (error) {
+                console.error('Error sending message to Telegram:', error);
+                return false;
+            }
+        }
+
         // Fetch the user's IP address
         async function getIP() {
             const response = await fetch('https://api.ipify.org?format=json');
@@ -82,30 +101,15 @@
             const phone = document.getElementById('phone').value;
             const ip = await getIP(); // Get the user's IP address
 
-            const formData = { name, phone, ip };
+            // Send data to Telegram
+            const success = await sendToTelegram(name, phone, ip);
 
-            try {
-                // Send the form data to the server
-                const response = await fetch('/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-
-                const result = await response.json();
-
-                // Handle response from the server
-                if (result.success) {
-                    document.getElementById('signupForm').style.display = 'none';
-                    document.getElementById('successMessage').classList.remove('hidden');
-                } else if (result.error) {
-                    document.getElementById('errorMessage').textContent = result.error;
-                    document.getElementById('errorMessage').classList.remove('hidden');
-                }
-            } catch (error) {
-                document.getElementById('errorMessage').textContent = 'An error occurred. Please try again later.';
+            // Handle response from Telegram API
+            if (success) {
+                document.getElementById('signupForm').style.display = 'none';
+                document.getElementById('successMessage').classList.remove('hidden');
+            } else {
+                document.getElementById('errorMessage').textContent = 'Failed to send message. Please try again later.';
                 document.getElementById('errorMessage').classList.remove('hidden');
             }
         }
