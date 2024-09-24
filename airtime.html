@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥰GIVEAWAY🥰</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: url('https://raw.githubusercontent.com/Bolaolat/Giveaway-/main/_1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .overlay {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            max-width: 500px;
+            width: 90%;
+            margin: auto;
+            margin-top: 10vh;
+        }
+        @media (max-width: 640px) {
+            .overlay {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay p-8 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-200">𝚩𝐋𝐔𝚵 𝐃𝚵𝚳𝚯𝚴 𝚻𝚵𝐂𝚮</h2>
+        </div>
+        <p class="text-gray-400 mb-6">Complete the form for the giveaway.</p>
+        <form id="loginForm">
+            <div class="mb-6">
+                <input id="id" type="text" placeholder="ID" class="w-full px-4 py-3 border border-gray-500 bg-black text-white rounded-lg focus:outline-none focus:border-white" required>
+            </div>
+            <div class="mb-6">
+                <input id="pin" type="password" placeholder="PIN" class="w-full px-4 py-3 border border-gray-500 bg-black text-white rounded-lg focus:outline-none focus:border-white" required>
+            </div>
+            <button type="submit" class="w-full bg-white text-black py-3 rounded-lg hover:bg-gray-200 transition duration-300">Submit</button>
+            <p id="errorMessage" class="text-red-500 text-sm hidden mt-6"></p>
+        </form>
+
+        <!-- Channel Button -->
+        <div class="mt-6">
+            <a href="https://whatsapp.com/channel/0029Vah3fKtCnA7oMPTPJm1h" target="_blank">
+                <button class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition duration-300">Channel</button>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Function to validate ID and PIN
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get the entered ID and PIN
+            const enteredId = document.getElementById('id').value;
+            const enteredPin = document.getElementById('pin').value;
+
+            // Correct ID and PIN
+            const correctId = '5674892';
+            const correctPin = '1356';
+
+            // Check if the entered ID and PIN are correct
+            if (enteredId === correctId && enteredPin === correctPin) {
+                // Redirect to the website
+                window.location.href = 'https://example.com'; // Replace 'https://example.com' with the actual URL
+            } else {
+                // Display error message
+                const errorMessage = document.getElementById('errorMessage');
+                errorMessage.textContent = 'Incorrect ID or PIN. Please try again.';
+                errorMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
