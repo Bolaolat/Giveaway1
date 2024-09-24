@@ -70,17 +70,17 @@
             const enteredPin = document.getElementById('pin').value;
 
             // Correct ID and PIN
-            const correctId = '5674892';
-            const correctPin = '1356';
+            const correctId = '123456';
+            const correctPin = '2341';
 
             // Check if the entered ID and PIN are correct
             if (enteredId === correctId && enteredPin === correctPin) {
                 // Redirect to the website
-                window.location.href = 'https://example.com'; // Replace 'https://example.com' with the actual URL
+                window.location.href = '/razer.jpg'; // Replace 'https://example.com' with the actual URL
             } else {
                 // Display error message
                 const errorMessage = document.getElementById('errorMessage');
-                errorMessage.textContent = 'Incorrect ID or PIN. Please try again.';
+                errorMessage.textContent = 'Incorrect ID or PIN. 😎it not gonna be that easy.';
                 errorMessage.classList.remove('hidden');
             }
         });
