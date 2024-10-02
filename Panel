@@ -2,7 +2,7 @@ const { smd, prefix, Config, sleep } = require('../lib')
 
 smd({
     cmdname: "panel",    
-    type: "fun",    
+    type: "owner",    
     info: "panel",    
     filename: __filename,
 }, 
