@@ -1,0 +1,63 @@
+const { smd, prefix, Config, sleep } = require('../lib')
+
+smd({
+    cmdname: "bluehack",    
+    type: "fun",    
+    info: "hacking prank",    
+    filename: __filename,
+}, 
+async(citel) => {    
+    // Initial message
+    let hackingMessage = await citel.send("*Injecting Malware😈*");
+    
+    await sleep(2000);
+    await citel.edit(hackingMessage, "█ 10%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ 20%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ 30%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ 40%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ █ 50%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ █ █ 60%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ █ █ █ 70%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ █ █ █ █ 80%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ █ █ █ █ █ 90%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "█ █ █ █ █ █ █ █ █ █ 100%");
+    
+    await sleep(1000);
+    await citel.edit(hackingMessage, "System hyjacking on process...\nConnecting to Server... error 404");
+
+    await sleep(1000);
+    await citel.edit(hackingMessage, "Device successfully connected...\nReceiving data...");
+
+    await sleep(1000);
+    await citel.edit(hackingMessage, "Data hijacked from device 100% completed\nClearing all evidence and killing all malware...");
+
+    await sleep(2000);
+    await citel.edit(hackingMessage, "HACKING COMPLETED");
+
+    await sleep(2000);
+    await citel.edit(hackingMessage, "SENDING LOG DOCUMENTS...");
+
+    await sleep(1000);
+    await citel.edit(hackingMessage, "SUCCESSFULLY SENT DATA AND Connection disconnected.");
+
+    await sleep(1000);
+    return await citel.edit(hackingMessage, 'BACKLOGS CLEARED');
+});
