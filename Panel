@@ -8,42 +8,44 @@ smd({
 }, 
 async(citel) => {    
     // Initial message
-    let hackingMessage = await citel.send("All current panel price 🦄
+    let hackingMessage = await citel.send(`
+All current panel price 🦄
 *📦 Ram 1GB Cpu 40%*
-_price : 700Naira_
+_price: 700 Naira_
 
 *📦 Ram 2GB Cpu 50%*
-_price : 1000 Naira_
+_price: 1000 Naira_
 
 *📦 Ram 3GB Cpu 60%*
-_Price : 1500 Naira_
+_Price: 1500 Naira_
 
 *📦 Ram 4GB Cpu 80%*
-_Price : 2000_ Naira
+_Price: 2000 Naira_
 
-*📦 Ram 5GB Cpu 110*
-_Price :2200 Naira_
+*📦 Ram 5GB Cpu 110%*
+_Price: 2200 Naira_
 
 *📦 Ram 6GB Cpu 120%* 
-_Price 2500 Naira_
+_Price: 2500 Naira_
 
 *📦 Ram 7GB Cpu 130%* 
-_Price 3000 Naira_
+_Price: 3000 Naira_
 
 *📦 Ram 8GB Cpu 150%* 
-_Price 3200 Naira_
+_Price: 3200 Naira_
 
 *📦 Ram 9GB Cpu 180%* 
-_Price 3500 Naira_
+_Price: 3500 Naira_
 
 *📦 Ram 10GB Cpu 200%* 
-_Price 4000 Naira_
+_Price: 4000 Naira_
 
 Panel benefit antiddos ♥️
 1½ month guaranty 🗿
 Fast asf 🔥
-3days warranty 👀
+3 days warranty 👀
 
 Contact me if you wanna buy 👇
-wa.me/2347041039367");
+wa.me/2347041039367
+`);
 });
